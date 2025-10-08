@@ -26,12 +26,12 @@ class ManifestoCarga(db.Model):
 
 
 
-    def __init__(self, tipo_carga, peso_carga, informacoes_motorista, informacoes_cliente, veiculo_id, origem_carga,
+    def __init__(self, tipo_carga, peso_carga, motorista_id, cliente_id, veiculo_id, origem_carga,
                  destino_carga, valor_km, distancia):
         self.tipo_carga = tipo_carga
         self.peso_carga = peso_carga
-        self.informacoes_cliente = informacoes_cliente
-        self.informacoes_motorista = informacoes_motorista
+        self.cliente_id = cliente_id
+        self.motorista_id = motorista_id
         self.veiculo_id = veiculo_id
         self.origem_carga = origem_carga
         self.destino_carga = destino_carga
@@ -50,8 +50,8 @@ class ManifestoCarga(db.Model):
         "id": self.id,
         "tipo_carga": self.tipo_carga,
         "peso_carga": self.peso_carga,
-        "informacoes_motorista": self.informacoes_motorista,
-        "informacoes_cliente": self.informacoes_cliente,
+        "motorista_id": self.motorista_id,
+        "cliente_id": self.cliente_id,
         "veiculo_id": self.veiculo_id,
         "origem_carga":self.origem_carga,
         "destino_carga":self.destino_carga,
@@ -65,21 +65,27 @@ class CargaNaoEncontrada(Exception):
 
 
 def create_carga(carga):
-    nova_carga = ManifestoCarga(
-        tipo_carga = carga["tipo_carga"],
-        peso_carga = carga["peso_carga"],
-        informacoes_cliente = carga["informacoes_cliente"],
-        informacoes_motorista = carga["informacoes_motorista"],
-        veiculo_id= carga["veiculo_id"],
-        origem_carga = carga["origem_carga"],
-        destino_carga = carga["destino_carga"],
-        valor_km = carga["valor_km"],
-        distancia = carga["distancia"]
-    )
+    
+    try:
+        nova_carga = ManifestoCarga(
+            tipo_carga = carga["tipo_carga"],
+            peso_carga = carga["peso_carga"],
+            cliente_id = carga["cliente_id"],
+            motorista_id = carga["motorista_id"],
+            veiculo_id= carga["veiculo_id"],
+            origem_carga = carga["origem_carga"],
+            destino_carga = carga["destino_carga"],
+            valor_km = carga["valor_km"],
+            distancia = carga["distancia"]
+        )
 
-    db.session.add(nova_carga)
-    db.session.commit()
-    return nova_carga.to_dict(), None
+        db.session.add(nova_carga)
+        db.session.commit()
+        return nova_carga.to_dict(), None
+
+    except Exception as e:
+        db.session.rollback()
+        return None, str(e)
 
     
 def read_todas_cargas():
@@ -104,8 +110,8 @@ def update_carga(id_carga, dados_atualizados):
     
     carga.tipo_carga = dados_atualizados["tipo_carga"]
     carga.peso_carga = dados_atualizados["peso_carga"]
-    carga.informacoes_cliente = dados_atualizados["informacoes_cliente"]
-    carga.informacoes_motorista = dados_atualizados["informacoes_motorista"]
+    carga.cliente_id = dados_atualizados["cliente_id"]
+    carga.motorista_id = dados_atualizados["motorista_id"]
     carga.veiculo_id = dados_atualizados["veiculo_id"]
     carga.origem_carga = dados_atualizados["origem_carga"]
     carga.destino_carga = dados_atualizados["destino_carga"]

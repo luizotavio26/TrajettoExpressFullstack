@@ -23,11 +23,11 @@ def cria_cargas():
           required:
             - tipo_carga
             - peso_carga
-            - informacoes_motorista
-            - informacoes_cliente
+            - motorista_id
+            - cliente_id
+            - veiculo_id
             - origem_carga
             - destino_carga
-            - valor_frete
             - valor_km
             - distancia
           properties:
@@ -37,13 +37,13 @@ def cria_cargas():
             peso_carga:
               type: number
               example: 150.5
-            informacoes_motorista:
+            motorista_id:
               type: integer
               example: 1
-            informacoes_cliente:
+            cliente_id:
               type: integer
               example: 2
-            informacoes_veiculo:
+            veiculo_id:
               type: integer
               example: 3
             origem_carga:
@@ -52,9 +52,6 @@ def cria_cargas():
             destino_carga:
               type: string
               example: "Rio de Janeiro"
-            valor_frete:
-              type: number
-              example: 500.0
             valor_km:
               type: number
               example: 2.5
@@ -69,6 +66,7 @@ def cria_cargas():
       500:
         description: Erro interno do servidor.
     """
+
     
     dados = request.get_json()
     try:
@@ -128,7 +126,7 @@ def le_cargas_id(id_cargas):
     try:
         carga = manifesto_carga_model.read_cargas_id(id_cargas)
         return jsonify(carga), 200
-    except CargaNaoEncontrada():
+    except CargaNaoEncontrada:
         return jsonify({'erro': 'Carga não encontrada'}), 404
     except Exception as e:
         return jsonify({'erro': str(e)}), 500

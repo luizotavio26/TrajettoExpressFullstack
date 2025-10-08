@@ -9,10 +9,10 @@ class Motoristas(db.Model):
     cpf = db.Column(db.String(15), nullable=False)
     rg = db.Column(db.String(15), nullable=False)
     salario = db.Column(db.Float, nullable=False)
-    data_nascimento = db.Column(db.Date, nullable=False)
+    data_nascimento = db.Column(db.String(10), nullable=False)
     numero_cnh = db.Column(db.String(20), nullable=False)
     categoria_cnh = db.Column(db.String(10), nullable=False)
-    validade_cnh = db.Column(db.Date, nullable=False)
+    validade_cnh = db.Column(db.String(10), nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     endereco = db.Column(db.String(100), nullable=False)
@@ -67,7 +67,7 @@ def create_motorista(motorista):
         cpf = motorista["cpf"], 
         rg = motorista["rg"],
         salario = motorista["salario"],
-        data_nascimento = datetime.strptime(motorista['data_nascimento'], "%Y-%m-%d").date(),
+        data_nascimento = motorista['data_nascimento'],
         numero_cnh = motorista["numero_cnh"],
         categoria_cnh = motorista["categoria_cnh"],
         validade_cnh = motorista["validade_cnh"], 

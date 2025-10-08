@@ -26,7 +26,7 @@ def listarVeiculos():
                 example: 1
               placa:
                 type: string
-                example: "ABC-1234"
+                example: "ABC1234"
               modelo:
                 type: string
                 example: "Volvo FH"
@@ -295,7 +295,7 @@ def apagar_veiculos_id(id_veiculo):
       400:
         description: Erro na requisição.
     """
-    
+
     try:
         deletado = cadastro_veiculos.deleteVeiculoPorId(id_veiculo)
         if deletado:
