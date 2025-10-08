@@ -124,7 +124,7 @@ Facilidade de implantação
 
 -----------------------------------------------------------
 
-📌 **Diagrama de Deployment**
+📌 **Diagrama ER**
 
 ![Imagem Diagrama](https://github.com/user-attachments/assets/59aa53a0-aa70-406a-af29-11617cdd4fe1)
 
