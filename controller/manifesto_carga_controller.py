@@ -4,14 +4,72 @@ from model.manifesto_carga_model import CargaNaoEncontrada
 
 manifesto_cargas_blueprint = Blueprint('manifesto_carga', __name__)
 
-
-@manifesto_cargas_blueprint.route("/conexao", methods=['GET'])
-def testa_conexao():
-    return jsonify({"message":"conexao com api"}), 200
-
 		
 @manifesto_cargas_blueprint.route('/cargas', methods=['POST'])
 def cria_cargas():
+    """
+    Cria uma nova carga.
+    ---
+    description: Registra uma nova carga no sistema.
+    tags:
+      - Manifesto
+    parameters:
+      - in: body
+        name: body
+        required: true
+        description: Dados da carga a ser criada.
+        schema:
+          type: object
+          required:
+            - tipo_carga
+            - peso_carga
+            - informacoes_motorista
+            - informacoes_cliente
+            - origem_carga
+            - destino_carga
+            - valor_frete
+            - valor_km
+            - distancia
+          properties:
+            tipo_carga:
+              type: string
+              example: "Frágil"
+            peso_carga:
+              type: number
+              example: 150.5
+            informacoes_motorista:
+              type: integer
+              example: 1
+            informacoes_cliente:
+              type: integer
+              example: 2
+            informacoes_veiculo:
+              type: integer
+              example: 3
+            origem_carga:
+              type: string
+              example: "São Paulo"
+            destino_carga:
+              type: string
+              example: "Rio de Janeiro"
+            valor_frete:
+              type: number
+              example: 500.0
+            valor_km:
+              type: number
+              example: 2.5
+            distancia:
+              type: number
+              example: 200.0
+    responses:
+      200:
+        description: Carga criada com sucesso.
+      400:
+        description: Erro de validação dos dados enviados.
+      500:
+        description: Erro interno do servidor.
+    """
+    
     dados = request.get_json()
     try:
         novo_carga, erro = manifesto_carga_model.create_carga(dados)
@@ -24,6 +82,19 @@ def cria_cargas():
 
 @manifesto_cargas_blueprint.route('/cargas', methods=['GET'])
 def le_cargas():
+    """
+    Lista todas as cargas.
+    ---
+    description: Retorna todas as cargas registradas no sistema.
+    tags:
+      - Manifesto
+    responses:
+      200:
+        description: Lista de cargas retornada com sucesso.
+      500:
+        description: Erro interno do servidor.
+    """
+    
     try:
         cargas,erro = manifesto_carga_model.read_todas_cargas()
         return jsonify(cargas), 200
@@ -33,6 +104,27 @@ def le_cargas():
 
 @manifesto_cargas_blueprint.route('/cargas/<int:id_cargas>', methods =['GET'])
 def le_cargas_id(id_cargas):
+    """
+    Busca uma carga pelo ID.
+    ---
+    description: Retorna os dados de uma carga específica pelo ID.
+    tags:
+      - Manifesto
+    parameters:
+      - in: path
+        name: id_cargas
+        required: true
+        type: integer
+        description: ID da carga a ser retornada.
+    responses:
+      200:
+        description: Carga encontrada com sucesso.
+      404:
+        description: Carga não encontrada.
+      500:
+        description: Erro interno do servidor.
+    """
+    
     try:
         carga = manifesto_carga_model.read_cargas_id(id_cargas)
         return jsonify(carga), 200
@@ -44,6 +136,54 @@ def le_cargas_id(id_cargas):
 
 @manifesto_cargas_blueprint.route('/cargas/<int:id_cargas>', methods=['PUT'])
 def atualiza_cargas(id_cargas):
+    """
+    Atualiza uma carga existente.
+    ---
+    description: Atualiza os dados de uma carga pelo ID.
+    tags:
+      - Manifesto
+    parameters:
+      - in: path
+        name: id_cargas
+        required: true
+        type: integer
+        description: ID da carga a ser atualizada.
+      - in: body
+        name: body
+        required: true
+        description: Dados a serem atualizados da carga.
+        schema:
+          type: object
+          properties:
+            tipo_carga:
+              type: string
+            peso_carga:
+              type: number
+            informacoes_motorista:
+              type: integer
+            informacoes_cliente:
+              type: integer
+            informacoes_veiculo:
+              type: integer
+            origem_carga:
+              type: string
+            destino_carga:
+              type: string
+            valor_frete:
+              type: number
+            valor_km:
+              type: number
+            distancia:
+              type: number
+    responses:
+      200:
+        description: Carga atualizada com sucesso.
+      404:
+        description: Carga não encontrada.
+      400:
+        description: Erro na requisição.
+    """
+    
     dados = request.get_json()
     try:
         atualizado = manifesto_carga_model.update_carga(id_cargas, dados)
@@ -57,6 +197,27 @@ def atualiza_cargas(id_cargas):
 
 @manifesto_cargas_blueprint.route('/cargas/<int:id_cargas>', methods = ['DELETE'])
 def deleta_cargas_id(id_cargas):
+    """
+    Deleta uma carga pelo ID.
+    ---
+    description: Remove uma carga específica do sistema pelo ID.
+    tags:
+      - Manifesto
+    parameters:
+      - in: path
+        name: id_cargas
+        required: true
+        type: integer
+        description: ID da carga a ser removida.
+    responses:
+      200:
+        description: Carga deletada com sucesso.
+      404:
+        description: Carga não encontrada.
+      400:
+        description: Erro na requisição.
+    """
+    
     try:
         deletado = manifesto_carga_model.delete_carga_id(id_cargas)
         if deletado:
@@ -69,6 +230,21 @@ def deleta_cargas_id(id_cargas):
     
 @manifesto_cargas_blueprint.route('/cargas', methods = ['DELETE'])
 def deleta_cargas():
+    """
+    Deleta todas as cargas.
+    ---
+    description: Remove todas as cargas registradas no sistema.
+    tags:
+      - Manifesto
+    responses:
+      200:
+        description: Todas as cargas foram deletadas com sucesso.
+      400:
+        description: Erro ao tentar excluir as cargas.
+      500:
+        description: Erro interno do servidor.
+    """
+    
     try:
         deletado, erro = manifesto_carga_model.delete_todas_cargas()
         if erro:

@@ -2,7 +2,7 @@ from config import db
 from datetime import datetime
 
 class Motoristas(db.Model):
-    __tablename__ = "Motoristas"
+    __tablename__ = "motoristas"
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
@@ -20,9 +20,7 @@ class Motoristas(db.Model):
     uf = db.Column(db.String(50), nullable=False)
     cep = db.Column(db.String(50), nullable=False)
     
-    #validar após a criação da tabela e CRUD de veiculos
-    #veiculos = db.relationship("Veiculos", back_populates="motorista")
-
+    manifestos = db.relationship("ManifestoCarga", back_populates="motorista")
     
     def __init__(self,nome, cpf, rg, salario, data_nascimento, numero_cnh, categoria_cnh, validade_cnh, telefone, email, endereco, cidade, uf, cep):
         self.nome = nome
