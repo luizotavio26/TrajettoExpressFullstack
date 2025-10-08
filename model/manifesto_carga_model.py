@@ -1,18 +1,26 @@
 from config import db
 
 class ManifestoCarga(db.Model):
-    __tablename__ = "manifesto_carga"
+    __tablename__ = "Manifesto_carga"
 
     id = db.Column(db.Integer, primary_key=True)
     tipo_carga = db.Column(db.String(50), nullable=False)
     peso_carga = db.Column(db.Float, nullable=False)
-    informacoes_motorista = db.Column(db.String(200), nullable=False)
-    informacoes_cliente = db.Column(db.String(200), nullable=False)
+
+    motorista_id = db.Column(db.Integer, db.ForeignKey("motoristas.id"), nullable=False)
+    cliente_id = db.Column(db.Integer, db.ForeignKey("clientes.id"), nullable=False)
+    veiculo_id = db.Column(db.Integer, db.ForeignKey("veiculos.id"), nullable=False)
+
     origem_carga = db.Column(db.String(200), nullable=False)
     destino_carga = db.Column(db.String(200), nullable=False)
     valor_frete = db.Column(db.Float, nullable=False)
     valor_km = db.Column(db.Float, nullable=False)
     distancia = db.Column(db.Float, nullable=False)
+
+    motorista = db.relationship("Motoristas", back_populates="manifestos")
+    cliente = db.relationship("Clientes", back_populates="manifestos")
+    veiculo = db.relationship("Veiculos", back_populates="manifestos")
+
 
 
     def __init__(self, tipo_carga, peso_carga, informacoes_motorista, informacoes_cliente, origem_carga,

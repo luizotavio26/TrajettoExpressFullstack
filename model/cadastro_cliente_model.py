@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 class Clientes(db.Model):
 
-    __tablename__ = "clientes"   
+    __tablename__ = "Clientes"   
      
     id = db.Column(db.Integer, primary_key=True ,)
     cnpj = db.Column(db.String(14), nullable=False, unique=True)
