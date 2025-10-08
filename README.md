@@ -11,15 +11,13 @@ Durante toda a construção, utilizaremos Docker para criar, implantar e executa
 ```
 👥 Participantes
 
-Ana Beatriz
+Ana Beatriz        RA:2401228
 
-João Pedro
+Luiz Otávio        RA:2401300
 
-Luiz Otávio
+Murillo Rodrigues  RA:2400338
 
-Murillo Rodrigues
-
-Uatila Santos
+Uatila Santos      RA:2400250
 ```
 
 
@@ -29,19 +27,22 @@ Criar um sistema completo, com front-end, back-end e banco de dados, garantindo 
 
 --------------------------------------------------------------
 
-📌 **Diagrama de Deployment**
 
-![Imagem não reenderizada](./images/Diagrama%20de%20Deployment.jpg)
+🛠️ **Tecnologias Utilizadas**
+
+    - Python
+
+    - Flask
+
+    - Render
+
+    - Docker
+
+    - Swagger
+
+
 
 -----------------------------------------------------------
-
-🖥 **Front-End**
-
-O site será desenvolvido com as três tecnologias base da Web:
-
-HTML → Estrutura das páginas
-CSS → Estilo e identidade visual
-JavaScript → Dinamismo e interatividade
 
 
 ⚙️ **Back-End**
@@ -56,8 +57,8 @@ Flask → Microframework que oferece rapidez, escalabilidade e facilidade para c
 
 O banco será implementado com:
 
-MySQL → Armazenamento seguro e eficiente
-Suporte a APIs MySQL para melhor desempenho, segurança e integração padronizada
+Postgress → Armazenamento seguro e eficiente
+Suporte a APIs Postgress para melhor desempenho, segurança e integração padronizada
 
 
 🐳 **Containerização**
@@ -66,24 +67,6 @@ Todo o projeto será conteinerizado com Docker, garantindo:
 Isolamento do ambiente
 Portabilidade
 Facilidade de implantação
-
------------------------------------------------------------
-
-📌 **Board do Projeto**
-
-[Board do Projeto no Miro](https://miro.com/app/board/uXjVJQ4lUns=/)
-
------------------------------------------------------------
-
-✅ **Lista de Funcionalidades - em ordem por prioridade**
-
-1. Manifesto de carga
-2. Cadastro de clientes
-3. Cadastro de veículos
-4. Cadastros de motoristas
-5. Cálculo do valor de frete
-6. Emissão de relatórios e documentos
-7. Faturamento da empresa
 
 ------------------------------------------------------------
 
@@ -94,8 +77,7 @@ Facilidade de implantação
 1.  Clone o repositório
 
     ```bash
-    git clone https://github.com/luizotavio26/projeto---software-product.git
-    cd projeto---software-product
+    git clone https://github.com/luizotavio26/TrajettoExpressFullstack.git
     ```
 
 2.  Crie um ambiente virtual (opcional, mas recomendado)
@@ -119,7 +101,6 @@ Facilidade de implantação
     ```
 
     A aplicação estará disponível em: 📍 http://localhost:5036
-    📝 **Observação:** O banco de dados é criado automaticamente na primeira execução.
 
 ---
 
@@ -128,8 +109,7 @@ Facilidade de implantação
 1.  Clone o repositório
 
     ```bash
-    git clone https://github.com/luizotavio26/projeto---software-product.git
-    cd projeto---software-product
+    git clone https://github.com/luizotavio26/TrajettoExpressFullstack.git
     ```
 
 2.  Construa a imagem Docker
@@ -146,3 +126,88 @@ Facilidade de implantação
     ```bash
     docker-compose up --build
     ```
+
+-----------------------------------------------------------
+
+📌 **Diagrama de Deployment**
+
+![Imagem Diagrama](https://github.com/user-attachments/assets/59aa53a0-aa70-406a-af29-11617cdd4fe1)
+
+
+
+# Descrição dos Atributos do Banco de Dados
+
+## 1. Tabela **clientes**
+
+| Atributo      | Tipo            | Descrição                                                                                 |
+|---------------|-----------------|-------------------------------------------------------------------------------------------|
+| `id`          | Integer (PK)    | Identificador único de cada cliente no sistema.                                          |
+| `cnpj`        | String(14)      | Cadastro Nacional da Pessoa Jurídica, único e obrigatório.                               |
+| `razao_social`| String(100)     | Nome empresarial oficial do cliente, único e obrigatório.                               |
+| `email`       | String(100)     | Endereço de e-mail para contato, único e obrigatório.                                   |
+| `senha`       | String(128)     | Senha criptografada para autenticação do cliente.                                       |
+| `telefone`    | String(20)      | Número de telefone para contato, único e obrigatório.                                   |
+| `cep`         | String(9)       | Código de Endereçamento Postal do endereço.                                             |
+| `logradouro`  | String(100)     | Nome da rua, avenida ou logradouro.                                                     |
+| `numero`      | String(10)      | Número do imóvel/endereço.                                                              |
+| `complemento` | String(50)      | Informações adicionais do endereço (opcional).                                         |
+| `bairro`      | String(100)     | Bairro onde o cliente está localizado.                                                  |
+| `cidade`      | String(100)     | Cidade do cliente.                                                                      |
+| `estado`      | String(2)       | Unidade federativa (UF) do cliente, ex: SP, RJ.                                        |
+
+---
+
+## 2. Tabela **veiculos**
+
+| Atributo       | Tipo           | Descrição                                                                               |
+|----------------|----------------|-----------------------------------------------------------------------------------------|
+| `id`           | Integer (PK)   | Identificador único de cada veículo.                                                   |
+| `placa`        | String(7)      | Placa do veículo para identificação.                                                  |
+| `modelo`       | String(50)     | Modelo do veículo.                                                                      |
+| `marca`        | String(50)     | Marca do veículo.                                                                       |
+| `renavan`      | String(11)     | Registro Nacional de Veículos Automotores.                                             |
+| `chassi`       | String(17)     | Número do chassi do veículo, identificador único.                                     |
+| `cor`          | String(50)     | Cor do veículo.                                                                         |
+| `tipo`         | String(50)     | Tipo do veículo (ex: caminhão, van).                                                   |
+| `ano_modelo`   | String(4)      | Ano do modelo do veículo.                                                              |
+| `ano_fabricacao`| String(4)     | Ano de fabricação do veículo.                                                          |
+
+---
+
+## 3. Tabela **motoristas**
+
+| Atributo         | Tipo           | Descrição                                                                                 |
+|------------------|----------------|-------------------------------------------------------------------------------------------|
+| `id`             | Integer (PK)   | Identificador único do motorista.                                                        |
+| `nome`           | String(150)    | Nome completo do motorista.                                                              |
+| `cpf`            | String(15)     | Cadastro de Pessoa Física, documento de identificação do motorista.                      |
+| `rg`             | String(15)     | Registro Geral, documento de identidade.                                                 |
+| `salario`        | Float          | Remuneração do motorista.                                                                |
+| `data_nascimento`| Date           | Data de nascimento do motorista.                                                        |
+| `numero_cnh`     | String(20)     | Número da Carteira Nacional de Habilitação (CNH).                                        |
+| `categoria_cnh`  | String(10)     | Categoria da CNH, definindo os tipos de veículos que pode conduzir.                      |
+| `validade_cnh`   | Date           | Data de validade da CNH.                                                                 |
+| `telefone`       | String(20)     | Número de telefone para contato.                                                         |
+| `email`          | String(100)    | Endereço de e-mail do motorista.                                                        |
+| `endereco`       | String(100)    | Endereço residencial.                                                                    |
+| `cidade`         | String(50)     | Cidade do motorista.                                                                     |
+| `uf`             | String(50)     | Unidade federativa (UF) do endereço do motorista.                                        |
+| `cep`            | String(50)     | Código postal do endereço.                                                               |
+
+---
+
+## 4. Tabela **manifesto_carga**
+
+| Atributo             | Tipo           | Descrição                                                                                |
+|----------------------|----------------|------------------------------------------------------------------------------------------|
+| `id`                 | Integer (PK)   | Identificador único do manifesto de carga.                                              |
+| `tipo_carga`         | String(50)     | Descrição do tipo de carga transportada.                                               |
+| `peso_carga`         | Float          | Peso total da carga em quilogramas.                                                    |
+| `origem_carga`       | String(200)    | Local de origem da carga.                                                               |
+| `destino_carga`      | String(200)    | Local de destino da carga.                                                              |
+| `valor_frete`        | Float          | Valor total do frete cobrado pelo transporte.                                           |
+| `valor_km`           | Float          | Valor cobrado por quilômetro rodado.                                                   |
+| `distancia`          | Float          | Distância total percorrida em quilômetros.                                             |
+| `motorista_id`       | Integer (FK)   | Referência ao motorista responsável pelo transporte.                                   |
+| `cliente_id`         | Integer (FK)   | Referência ao cliente dono da carga.                                                   |
+| `veiculo_id`         | Integer (FK)   | Referência ao veículo utilizado no transporte.                                         |
