@@ -1,6 +1,6 @@
 from config import db
 from model.cadastro_cliente_model import Clientes
-from model.cadastro_veiculos import Veiculos
+from model.cadastro_veiculos_model import Veiculos
 from model.motorista_model import Motoristas
 
 class ManifestoCarga(db.Model):

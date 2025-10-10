@@ -1,5 +1,4 @@
 from config import db
-from datetime import datetime
 
 class Motoristas(db.Model):
     __tablename__ = "motoristas"
