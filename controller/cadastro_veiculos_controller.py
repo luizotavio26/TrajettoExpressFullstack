@@ -89,7 +89,7 @@ def listarVeiculoId(id_veiculo):
               example: 1
             placa:
               type: string
-              example: "ABC-1234"
+              example: "ABC1234"
             modelo:
               type: string
               example: "Volvo FH"
@@ -159,7 +159,7 @@ def cadastrar_veiculo():
           properties:
             placa:
               type: string
-              example: "ABC-1234"
+              example: "ABC1234"
             modelo:
               type: string
               example: "Volvo FH"
@@ -228,7 +228,7 @@ def atualizar_veiculos_id(id_veiculo):
           properties:
             placa:
               type: string
-              example: "XYZ-9876"
+              example: "XYZ9876"
             modelo:
               type: string
               example: "Scania R500"

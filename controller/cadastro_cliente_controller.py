@@ -312,8 +312,8 @@ def atualizarClientesId(id_clientes):
         return jsonify({'erro': str(e)}), 400
 
 
-@cadastro_clientes_blueprint.route("/clientes/<int:id_clientes>", methods=['DELETE'])
-def apagarClientesId(id_clientes):
+@cadastro_clientes_blueprint.route("/clientes/<int:id_cliente>", methods=['DELETE'])
+def apagarClientesId(id_cliente):
     """
     Deleta um cliente pelo ID.
     ---
@@ -336,11 +336,11 @@ def apagarClientesId(id_clientes):
     """
     
     try:
-        deletado = cadastro_cliente_model.deleteClientePorId(id_clientes)
+        deletado = cadastro_cliente_model.deleteClientePorId(id_cliente)
         if deletado:
-            return jsonify({'mensagem': 'Carga deletada com sucesso'}), 200
+            return jsonify({'mensagem': 'Cliente deletado com sucesso'}), 200
         else:
-            return jsonify({'erro': 'Carga não encontrada'}), 404
+            return jsonify({'erro': 'Cliente não encontrado'}), 404
     except Exception as e:
         return jsonify({'erro': str(e)}), 400
 
