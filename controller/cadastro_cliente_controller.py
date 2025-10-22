@@ -305,9 +305,9 @@ def atualizarClientesId(id_clientes):
     try:
         atualizado = cadastro_cliente_model.putClientePorId(id_clientes, dados)
         if atualizado:
-            return jsonify({'mensagem': 'Carga atualizada com sucesso'}), 200
+            return jsonify({'mensagem': 'Cliente atualizado com sucesso'}), 200
         else:
-            return jsonify({'erro': 'Carga não encontrada'}), 404
+            return jsonify({'erro': 'Cliente não encontrado'}), 404
     except Exception as e:
         return jsonify({'erro': str(e)}), 400
 
