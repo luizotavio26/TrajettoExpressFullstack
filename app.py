@@ -4,6 +4,8 @@ from controller.manifesto_carga_controller import manifesto_cargas_blueprint
 from controller.cadastro_cliente_controller import cadastro_clientes_blueprint
 from controller.cadastro_veiculos_controller import cadastro_veiculos_blueprint
 from controller.motorista_controller import motoristas_blueprint
+from controller.execultar_testes_controller import testes_blueprint
+from controller.documentos_controller import documentos as documentos_blueprint
 from flask_cors import CORS
 import os
 
@@ -26,6 +28,9 @@ app.register_blueprint(manifesto_cargas_blueprint)
 app.register_blueprint(cadastro_clientes_blueprint)
 app.register_blueprint(cadastro_veiculos_blueprint)
 app.register_blueprint(motoristas_blueprint)
+app.register_blueprint(testes_blueprint)
+app.register_blueprint(documentos_blueprint)
+
 
 
 
