@@ -27,11 +27,6 @@ app.register_blueprint(cadastro_clientes_blueprint)
 app.register_blueprint(cadastro_veiculos_blueprint)
 app.register_blueprint(motoristas_blueprint)
 
-#Só para testes, exlcuir depois
-@app.route("/login", methods=['GET'])
-def tela_login():
-    return render_template("login.html")
-
 if __name__ == "__main__":
     with app.app_context():
         if app.config['DEBUG']:
