@@ -31,7 +31,10 @@ app.register_blueprint(motoristas_blueprint)
 app.register_blueprint(testes_blueprint)
 app.register_blueprint(documentos_blueprint)
 
-
+#Só para testes, exlcuir depois
+@app.route("/login", methods=['GET'])
+def tela_login():
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
