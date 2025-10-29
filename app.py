@@ -1,4 +1,4 @@
-from flasgger import Swagger
+from flasgger import Swagger 
 from config import app,db
 from controller.manifesto_carga_controller import manifesto_cargas_blueprint
 from controller.cadastro_cliente_controller import cadastro_clientes_blueprint
