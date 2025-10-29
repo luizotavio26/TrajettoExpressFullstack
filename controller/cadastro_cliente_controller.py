@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify 
 from model import cadastro_cliente_model
 from model.cadastro_cliente_model import *
 
