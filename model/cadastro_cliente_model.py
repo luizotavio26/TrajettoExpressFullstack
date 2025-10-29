@@ -145,3 +145,18 @@ def deleteTodosClientes():
     db.session.commit()
     return {'message':"Usuários deletados com sucesso!"}
 
+def verifica_senha_email(dados):
+    #consultando o cliente pelo email
+    cliente = Clientes.query.filter_by(email=dados["email"]).first()
+
+    #vendo se o email é valido
+    if cliente is None:
+        return {"message": "registro não encontrado, faça seu cadastro"}
+    else:
+        #vendo se senha está correta
+        if dados["senha"] != cliente.senha:
+            return {"message": "senha invalida"}
+
+        # se tudo estiver certo
+        else:
+            return {"success": True, "message": "Login realizado com sucesso"}
