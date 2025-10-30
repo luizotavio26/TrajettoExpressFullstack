@@ -1,5 +1,5 @@
 from flasgger import Swagger
-from config import app,db
+from config import app,db, render_template
 from controller.manifesto_carga_controller import manifesto_cargas_blueprint
 from controller.cadastro_cliente_controller import cadastro_clientes_blueprint
 from controller.cadastro_veiculos_controller import cadastro_veiculos_blueprint
