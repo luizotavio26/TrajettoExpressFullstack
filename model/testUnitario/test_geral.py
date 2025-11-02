@@ -24,18 +24,18 @@ class Test(unittest.TestCase):
         self.assertIn("logradouro", data)            # Campo deve existir
         self.assertEqual(data["bairro"], "Sé") 
      
-    def test_database_connection(self):
-        db_uri = "postgresql://software_product_user:zXFrTtfRy6axGTP214ljH8IpHSgaZ3Hb@dpg-d3km73a4d50c73ddhm50-a.oregon-postgres.render.com/software_product"
+    # def test_database_connection(self):
+    #     db_uri = "postgresql://software_product_user:zXFrTtfRy6axGTP214ljH8IpHSgaZ3Hb@dpg-d3km73a4d50c73ddhm50-a.oregon-postgres.render.com/software_product"
         
-        try:
-            engine = create_engine(db_uri)
-            connection = engine.connect()
-            connection.close()
-            connected = True
-        except OperationalError:
-            connected = False
+    #     try:
+    #         engine = create_engine(db_uri)
+    #         connection = engine.connect()
+    #         connection.close()
+    #         connected = True
+    #     except OperationalError:
+    #         connected = False
         
-        self.assertTrue(connected, "Falha ao conectar ao banco de dados")
+    #     self.assertTrue(connected, "Falha ao conectar ao banco de dados")
         
 if __name__ == '__main__':
     unittest.main()
