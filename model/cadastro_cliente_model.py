@@ -1,6 +1,6 @@
 from config import db
 from sqlalchemy.exc import IntegrityError
-
+import jwt
 
 class Clientes(db.Model):
 
@@ -159,4 +159,13 @@ def verifica_senha_email(dados):
 
         # se tudo estiver certo
         else:
-            return {"success": True, "message": "Login realizado com sucesso"}
+            #Gerando o token
+            token = jwt.encode(
+            {"email": dados["email"], "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)},
+            SECRET_KEY,
+            algorithm="HS256"
+        )
+            # retornando a mensagem de sucesso e o token
+           return ({"message": "Login realizado com sucesso", "token": token, "success": True})
+
+
